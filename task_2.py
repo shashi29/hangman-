@@ -8,7 +8,7 @@ def predict(data , word):
     print("Lenght of input character",input_word_length)
     #Filter out the word from data which has length = input_word_length
     specific_data = data[data['Word_length']==input_word_length]
-    print(specific_data.head())
+    print(specific_data.head)
     for i in specific_data['Word']:
         if i == word:
             print("The word in the list")
@@ -38,12 +38,17 @@ def predict(data , word):
             counts_df = counts_df.T
             counts_df.reset_index(inplace=True)
             counts_df.columns = ['Letter','Count']
-            counts_df = counts_df[2:]
+            counts_df = counts_df[3:]
+            counts_df.sort_values(by='Count',axis=0,inplace=True,ascending=False)
             print((counts_df.head))
             #print(counts_df.head())
-            guess = input("Guess letter for input: ")
+            #guess = input("Guess letter for input: ")
+            first_letter = counts_df['Letter'].values[0]
+            print("First prediction of the letter",first_letter)
+            counts_df = counts_df.iloc[1:]
+            print(counts_df.head)
             for s in range(len(word)):
-                if word[s] == guess:
+                if word[s] == first_letter:
                     print("Find the first match")
                     Flag2 = 1
                     goodprediction = goodprediction + 1
